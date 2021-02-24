@@ -1,7 +1,7 @@
 <hr>
 <h2 class="text-warning">List of Product</h2>
 <hr>
-<form action="#" [formGroup]="searchProductForm">
+<!-- <form action="#" [formGroup]="searchProductForm">
     <div class="form-group">
         <label for="cari">Product ID</label>
         <div>
@@ -9,7 +9,7 @@
         </div>
     </div>
     <input class="btn btn-info" type="submit" value="Search">
-</form>
+</form> -->
 <hr>
 <table class="table table-striped table-hover">
     <thead>
@@ -42,9 +42,9 @@
         <td>{{prd.reorderLevel}}</td>
         <td>{{prd.discontinued}}</td>
         <td>
-            <a routerLink="/addproduct/{{prd.productId}}">Edit</a>
+            <button routerLink="/addproduct/{{prd.productId}}">Edit</button>
             <br>
-            <a class="text-danger" routerLink="/deleteproduct/{{prd.productId}}">Delete</a>
+            <button class="text-danger" (click)="hapus(prd.productId)">Delete</button>
         </td>
     </tr>
     </tbody>

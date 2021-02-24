@@ -1,11 +1,11 @@
 <form class="form-horizontal" method="post" [formGroup]="productForm">
     <fieldset>
-        <legend>Input Product</legend>
+        <legend>{{this.id == undefined ? 'Input' : 'Update'}} Product</legend>
         <div class="form-group">
             <label for="productId" class="col">Product ID</label>
             <div class="col">
                 <input type="text" class="form-control" id="productId" placeholder="Product ID"
-                [formControlName]="'productId'">
+                [formControlName]="'productId'" [readonly]="this.id == undefined ? false : true">
                 <span *ngIf="!productForm.get('productId')?.valid &&
                 productForm.get('productId')?.touched" class="text-danger">Wajib diisi!</span>
             </div>

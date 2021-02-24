@@ -11,11 +11,13 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  addProduct(products: Products, isEdit: boolean):  Observable<any> {
+  addProduct(products: Products):  Observable<any> {
     let url = 'saveproductjson';
-    if (isEdit) {
-      url = 'saveproductjson';
-    }
+    return this.httpClient.post(environment.baseUrl + url, products);
+  }
+
+  updateProduct(products: Products):  Observable<any> {
+    let url = 'updateproductjson';
     return this.httpClient.post(environment.baseUrl + url, products);
   }
 
@@ -30,7 +32,7 @@ export class ProductService {
   }
 
   deleteProductById(id: bigint): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + 'deleteproductjson/' + id)
-    .pipe(map( data => data ));
+    return this.httpClient.delete(environment.baseUrl + 'deleteproductjson/' + id)
+    .pipe(map( data => data as Products[] ));
   }
 }

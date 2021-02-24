@@ -9,6 +9,7 @@ import { ProductService } from './../product.service';
   templateUrl: './add-product.component.html',
   providers: [ProductService]
 })
+
 export class AddProductComponent implements OnInit {
 
   id!: bigint;
@@ -49,8 +50,7 @@ export class AddProductComponent implements OnInit {
           }
         });
       }
-    }
-    );
+    });
   }
 
   simpan() {
@@ -67,16 +67,26 @@ export class AddProductComponent implements OnInit {
       products.reorderLevel = this.productForm?.controls.reorderLevel.value;
       products.discontinued = this.productForm?.controls.discontinued.value;
       console.log(products);
-      this.productService.addProduct(products, false).subscribe(
-        hasil => {
+      console.log(" id " + this.id);
+      if (this.id == undefined){
+        this.productService.addProduct(products).subscribe( hasil => {
+            console.log(hasil);
+            alert("Simpan Berhasil!");
+            this.router.navigateByUrl('/listproduct');
+          }, error => {
+            console.log(error);
+            alert("Simpan Gagal!");
+          });
+      } else {
+        this.productService.updateProduct(products).subscribe( hasil => {
           console.log(hasil);
-          alert("Simpan Berhasil!");
+          alert("Update Berhasil!");
           this.router.navigateByUrl('/listproduct');
         }, error => {
           console.log(error);
-          alert("Simpan Gagal!");
-        }
-      );
+          alert("Update Gagal!");
+        });
+      }
     } else {
       alert("Wajib diisi!");
     }

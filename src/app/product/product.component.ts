@@ -13,7 +13,7 @@ import { Products } from './products';
 export class ProductComponent implements OnInit {
 
   listPrd!: Products[];
-  searchProductForm!: FormGroup;
+  // searchProductForm!: FormGroup;
   id!: bigint;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
@@ -26,15 +26,14 @@ export class ProductComponent implements OnInit {
     this.productService.getProductList().subscribe( data => {
       this.listPrd = data;
     });
+  }
 
-    this.route.params.subscribe(rute => {
-      this.id = rute.id;
-      console.log(" id " + this.id);
-      if (this.id) {
-        this.productService.deleteProductById(this.id);
-        alert('Delete Data ProductID ' + this.id + ' Berhasil!');
-        this.router.navigateByUrl('/listproduct');
-      }
+  hapus(idd: bigint){
+    console.log(idd);
+    this.productService.deleteProductById(idd).subscribe( newdata => {
+      console.log(newdata);
+      alert('Delete Data ProductID ' + idd + ' Berhasil!');
+      this.listPrd = newdata;
     });
   }
 
