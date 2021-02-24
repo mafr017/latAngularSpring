@@ -11,6 +11,7 @@ import { ProductService } from './../product.service';
 })
 export class AddProductComponent implements OnInit {
 
+  id!: bigint;
   productForm!: FormGroup;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
@@ -29,6 +30,27 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(rute => {
+      this.id = rute.id;
+      console.log(" id " + this.id);
+      if (this.id) {
+        this.productService.getProductById(this.id).subscribe(hasil => {
+          if (hasil) {
+            this.productForm.get('productId')?.setValue(hasil.productId)
+            this.productForm.get('productName')?.setValue(hasil.productName)
+            this.productForm.get('supplierId')?.setValue(hasil.supplierId)
+            this.productForm.get('categoryId')?.setValue(hasil.categoryId)
+            this.productForm.get('quantityperUnit')?.setValue(hasil.quantityperUnit)
+            this.productForm.get('unitPrice')?.setValue(hasil.unitPrice)
+            this.productForm.get('unitsInStock')?.setValue(hasil.unitsInStock)
+            this.productForm.get('unitsOnOrder')?.setValue(hasil.unitsOnOrder)
+            this.productForm.get('reorderLevel')?.setValue(hasil.reorderLevel)
+            this.productForm.get('discontinued')?.setValue(hasil.discontinued)
+          }
+        });
+      }
+    }
+    );
   }
 
   simpan() {
