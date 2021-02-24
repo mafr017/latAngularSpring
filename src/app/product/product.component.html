@@ -1,0 +1,47 @@
+<hr>
+<h2 class="text-warning">List of Product</h2>
+<hr>
+<form action="#" [formGroup]="searchProductForm">
+    <div class="form-group">
+        <label for="cari">Product ID</label>
+        <div>
+            <input type="text" class="form-control" id="cari" name="cari" placeholder="Product ID" [formControlName]="'productName'">
+        </div>
+    </div>
+    <input class="btn btn-info" type="submit" value="Search">
+</form>
+<hr>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">ProductId</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">SupplierId</th>
+        <th scope="col">CategoryId</th>
+        <th scope="col">Quantity per Unit</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Unit in Stock</th>
+        <th scope="col">Unit on Order</th>
+        <th scope="col">Reorder Level</th>
+        <th scope="col">Discontiued</th>
+        <th scope="col">Control</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let prd of listPrd; let indx=index;">
+        <td>{{indx + 1}}</td>
+        <td>{{prd.productId}}</td>
+        <td>{{prd.productName}}</td>
+        <td>{{prd.supplierId}}</td>
+        <td>{{prd.categoryId}}</td>
+        <td>{{prd.quantityperUnit}}</td>
+        <td>{{prd.unitPrice}}</td>
+        <td>{{prd.unitsInStock}}</td>
+        <td>{{prd.unitsOnOrder}}</td>
+        <td>{{prd.reorderLevel}}</td>
+        <td>{{prd.discontinued}}</td>
+        <td><a href="#">Edit</a>&nbsp;<a href="#" class="text-danger">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
