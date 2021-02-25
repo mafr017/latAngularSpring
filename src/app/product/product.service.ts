@@ -21,11 +21,13 @@ export class ProductService {
     return this.httpClient.post(environment.baseUrl + url, products);
   }
 
-  getProductList(id: number): Observable<any> {
-    if (id > 0 ) {
+  getProductList(id: string): Observable<any> {
+    if (id != null || id != undefined) {
+      // get list product by productName
       return this.httpClient.get(environment.baseUrl + 'listproductjson?cari=' + id)
       .pipe(map( data => data as Products[] ));
     } else {
+      // get all list product
       return this.httpClient.get(environment.baseUrl + 'listproductjson/')
       .pipe(map( data => data as Products[] ));
     }

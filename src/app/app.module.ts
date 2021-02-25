@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 import { AddProductComponent } from './product/add-product/add-product.component';
+import { FindPipe } from './find.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
-    AddProductComponent
+    AddProductComponent,
+    FindPipe
   ],
   imports: [
     BrowserModule,

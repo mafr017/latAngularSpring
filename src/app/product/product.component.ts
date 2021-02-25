@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './product.service';
 import { Products } from './products';
@@ -14,17 +14,17 @@ export class ProductComponent implements OnInit {
 
   listPrd!: Products[];
   searchProductForm!: FormGroup;
-  id!: number;
+  id!: string;
+  searchStr = "";
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
     this.searchProductForm = new FormGroup({
-      productId: new FormControl()
+      productName: new FormControl(null)
     });
   }
 
   ngOnInit(): void {
-    this.id = 0;
-    this.productService.getProductList(0).subscribe( data => {
+    this.productService.getProductList('').subscribe( data => {
       this.listPrd = data;
     });
   }
@@ -39,11 +39,12 @@ export class ProductComponent implements OnInit {
   }
 
   cari() {
-    this.id = this.searchProductForm?.controls.productId.value;
-    console.log("Cari data producId:" + this.id);
-    if (this.id != null) {
+    this.id = this.searchProductForm?.controls.productName.value;
+    console.log("Cari data productName:" + this.id);
+    if (this.id) {
       this.productService.getProductList(this.id).subscribe( dataCari => {
         this.listPrd = dataCari;
+        console.log("Cari data productName:" + this.id);
       });
     } else {
       this.ngOnInit();
