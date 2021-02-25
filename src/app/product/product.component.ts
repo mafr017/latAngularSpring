@@ -13,28 +13,41 @@ import { Products } from './products';
 export class ProductComponent implements OnInit {
 
   listPrd!: Products[];
-  // searchProductForm!: FormGroup;
-  id!: bigint;
+  searchProductForm!: FormGroup;
+  id!: number;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
-    // this.searchProductForm = new FormGroup({
-      // productName: new FormControl()
-    // });
+    this.searchProductForm = new FormGroup({
+      productId: new FormControl()
+    });
   }
 
   ngOnInit(): void {
-    this.productService.getProductList().subscribe( data => {
+    this.id = 0;
+    this.productService.getProductList(0).subscribe( data => {
       this.listPrd = data;
     });
   }
 
-  hapus(idd: bigint){
+  hapus(idd: bigint) {
     console.log(idd);
-    this.productService.deleteProductById(idd).subscribe( newdata => {
-      console.log(newdata);
+    this.productService.deleteProductById(idd).subscribe( newData => {
+      console.log(newData);
       alert('Delete Data ProductID ' + idd + ' Berhasil!');
-      this.listPrd = newdata;
+      this.listPrd = newData;
     });
+  }
+
+  cari() {
+    this.id = this.searchProductForm?.controls.productId.value;
+    console.log("Cari data producId:" + this.id);
+    if (this.id != null) {
+      this.productService.getProductList(this.id).subscribe( dataCari => {
+        this.listPrd = dataCari;
+      });
+    } else {
+      this.ngOnInit();
+    }
   }
 
 }

@@ -21,9 +21,14 @@ export class ProductService {
     return this.httpClient.post(environment.baseUrl + url, products);
   }
 
-  getProductList(): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + 'listproductjson/')
-    .pipe(map( data => data as Products[] ));
+  getProductList(id: number): Observable<any> {
+    if (id > 0 ) {
+      return this.httpClient.get(environment.baseUrl + 'listproductjson?cari=' + id)
+      .pipe(map( data => data as Products[] ));
+    } else {
+      return this.httpClient.get(environment.baseUrl + 'listproductjson/')
+      .pipe(map( data => data as Products[] ));
+    }
   }
 
   getProductById(id: bigint): Observable<any> {
