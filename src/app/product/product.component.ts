@@ -17,7 +17,8 @@ export class ProductComponent implements OnInit {
   id!: string;
   searchStr = "";
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
+  constructor(private productService: ProductService, private route: ActivatedRoute,
+    private router: Router) {
     this.searchProductForm = new FormGroup({
       productName: new FormControl(null)
     });

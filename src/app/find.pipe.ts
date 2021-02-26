@@ -7,11 +7,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FindPipe implements PipeTransform {
 
   transform(value: any, propertyName: string, searchStr: string): any {
+    
+    let resultArray = [];
+    searchStr = searchStr.toLowerCase();
+    
     if (value.length === 0 || searchStr.trim().length === 0) {
       return value;
     }
-    let resultArray = [];
-    searchStr = searchStr.toLowerCase();
+
     for (const elem of value) {
       const str = elem[propertyName].toLowerCase();
 
@@ -19,6 +22,7 @@ export class FindPipe implements PipeTransform {
         resultArray.push(elem);
       }
     }
+    
     return resultArray;
   }
 }

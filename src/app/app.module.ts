@@ -8,22 +8,28 @@ import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { FindPipe } from './find.pipe';
+import { AuthService } from './auth/auth.service';
+import { HomeComponent } from './home/home.component';
+import { Observable } from 'rxjs';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     AddProductComponent,
-    FindPipe
+    FindPipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Observable
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
