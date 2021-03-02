@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import { AuthService } from './auth/auth.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Latihan Angular Spring';
 
-  constructor() { }
-  // constructor(public authService: AuthService) { }
+  // constructor() { }
+  constructor(public authService: AuthService) { }
 
-  // onLogout() {
-  //   this.authService.logout();
-  // }
+  onLogout() {
+    this.authService.logout();
+  }
 }
